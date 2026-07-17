@@ -1,0 +1,18 @@
+---
+// Soft callout for clarifications (plan §5).
+interface Props {
+  title?: string;
+}
+const { title } = Astro.props;
+---
+
+<aside class="my-7 rounded-xl border border-border bg-bg-subtle px-5 py-4">
+  {
+    title && (
+      <p class="mb-1 text-sm font-semibold text-text">{title}</p>
+    )
+  }
+  <div class="text-text-muted [&>:first-child]:mt-0 [&>:last-child]:mb-0">
+    <slot />
+  </div>
+</aside>

@@ -1,0 +1,118 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import TOC from '../components/TOC.astro';
+import PrevNext from '../components/PrevNext.astro';
+
+interface Link {
+  id: string;
+  title: string;
+}
+interface Props {
+  entry: CollectionEntry<'teachings'>;
+  headings: MarkdownHeading[];
+  prev?: Link;
+  next?: Link;
+}
+const { entry, headings, prev, next } = Astro.props;
+const { title, category, summary, keyScriptures, sermonReferences, draft } =
+  entry.data;
+---
+
+<BaseLayout title={title} description={summary}>
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:py-14">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="text-sm text-text-muted" data-pagefind-ignore>
+      <ol class="flex flex-wrap items-center gap-1.5">
+        <li><a href="/" class="hover:text-text no-underline hover:no-underline">Home</a></li>
+        <li aria-hidden="true">/</li>
+        <li><a href="/teachings/" class="hover:text-text no-underline hover:no-underline">Teachings</a></li>
+        <li aria-hidden="true">/</li>
+        <li class="text-text" aria-current="page">{title}</li>
+      </ol>
+    </nav>
+
+    <div class="mt-8 lg:grid lg:grid-cols-[1fr_16rem] lg:gap-12">
+      <!-- Main column -->
+      <article>
+        <header>
+          <div class="flex flex-wrap items-center gap-2" data-pagefind-ignore>
+            <span class="rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent-strong">
+              {category}
+            </span>
+            {
+              draft && (
+                <span class="rounded-full border border-border px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-text-muted">
+                  Draft
+                </span>
+              )
+            }
+          </div>
+
+          <h1 class="mt-4 text-4xl font-semibold sm:text-5xl">{title}</h1>
+
+          <p class="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
+            {summary}
+          </p>
+
+          {
+            keyScriptures.length > 0 && (
+              <div class="mt-6">
+                <p class="text-xs font-semibold uppercase tracking-wide text-text-muted">
+                  Key Scriptures
+                </p>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  {keyScriptures.map((s) => (
+                    <span class="rounded-md border border-accent/30 bg-accent-soft/40 px-2.5 py-1 font-serif text-sm text-text">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+        </header>
+
+        <hr class="my-8 border-border" />
+
+        <!-- Rendered doctrine body -->
+        <div class="prose">
+          <slot />
+        </div>
+
+        <!-- Sermon references -->
+        {
+          sermonReferences.length > 0 && (
+            <section class="mt-14" aria-labelledby="sermon-refs">
+              <h2 id="sermon-refs" class="font-serif text-2xl font-semibold">
+                Sermon References
+              </h2>
+              <ul class="mt-4 space-y-3">
+                {sermonReferences.map((r) => (
+                  <li class="rounded-xl border border-border bg-bg-subtle px-5 py-4">
+                    <p class="font-serif text-base text-text">
+                      &ldquo;{r.title}&rdquo;
+                    </p>
+                    <p class="mt-1 font-mono text-xs uppercase tracking-wider text-text-muted">
+                      {[r.date, r.reference].filter(Boolean).join('  ·  ')}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+
+        <PrevNext prev={prev} next={next} />
+      </article>
+
+      <!-- TOC sidebar (desktop) -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-24">
+          <TOC headings={headings} />
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

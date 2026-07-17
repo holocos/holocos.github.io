@@ -1,0 +1,26 @@
+---
+// Sermon quote — deliberately QUIETER than Scripture so the two are never
+// visually confused (plan §5 design rule). Serif regular, muted border,
+// citation line in small-caps mono carrying the verifiable tape number.
+interface Props {
+  title?: string;
+  date?: string;
+  ref?: string;
+}
+const { title, date, ref } = Astro.props;
+
+const cite = [title, date, ref].filter(Boolean).join('  ·  ');
+---
+
+<figure class="my-7 border-l-2 border-border py-2 pl-6 pr-5">
+  <blockquote class="font-serif leading-relaxed text-text-muted">
+    <slot />
+  </blockquote>
+  {
+    cite && (
+      <figcaption class="mt-3 font-mono text-xs uppercase tracking-wider text-text-muted">
+        {cite}
+      </figcaption>
+    )
+  }
+</figure>

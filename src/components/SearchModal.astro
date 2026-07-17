@@ -1,0 +1,109 @@
+---
+// ⌘K / Ctrl+K search modal. Pagefind's UI assets (/pagefind/*) are produced by
+// the `pagefind` build step, so they exist in `astro build` + preview and in
+// production, but NOT in `astro dev` — the modal degrades to a helpful message
+// there. Any [data-search-open] element opens it; no-JS users fall back to the
+// /search/ page via the anchor's href.
+---
+
+<dialog id="search-dialog" aria-label="Search the teachings">
+  <div class="pf-search flex max-h-[80vh] flex-col">
+    <div class="flex items-center justify-between border-b border-border px-4 py-3">
+      <p class="text-sm font-medium text-text-muted">Search the teachings</p>
+      <button
+        type="button"
+        data-search-close
+        class="rounded-md border border-border px-2 py-0.5 text-xs text-text-muted transition-colors hover:text-text hover:bg-bg-subtle"
+      >
+        Esc
+      </button>
+    </div>
+    <div class="overflow-y-auto p-4">
+      <div id="pagefind-search"></div>
+      <p id="search-fallback" hidden class="px-1 py-6 text-center text-sm text-text-muted">
+        Search is generated at build time. Run <code>npm run build &amp;&amp; npm run preview</code>
+        to try it locally — it works fully on the deployed site.
+      </p>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById(
+    'search-dialog',
+  ) as HTMLDialogElement | null;
+  const fallback = document.getElementById('search-fallback');
+  let initialized = false;
+
+  function focusInput() {
+    const input = dialog?.querySelector<HTMLInputElement>(
+      '.pagefind-ui__search-input',
+    );
+    input?.focus();
+  }
+
+  async function initSearch() {
+    if (initialized || !dialog) return;
+    initialized = true;
+
+    // Inject Pagefind's stylesheet.
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = '/pagefind/pagefind-ui.css';
+    document.head.appendChild(css);
+
+    // Load Pagefind's UI script (classic script exposing window.PagefindUI).
+    await new Promise<void>((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = '/pagefind/pagefind-ui.js';
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error('pagefind-ui unavailable'));
+      document.head.appendChild(s);
+    })
+      .then(() => {
+        // @ts-expect-error — global provided by pagefind-ui.js
+        new window.PagefindUI({
+          element: '#pagefind-search',
+          showSubResults: true,
+          showImages: false,
+          resetStyles: false,
+        });
+        setTimeout(focusInput, 50);
+      })
+      .catch(() => {
+        if (fallback) fallback.hidden = false;
+        initialized = false; // allow a retry once assets exist
+      });
+  }
+
+  function openSearch() {
+    if (!dialog) return;
+    dialog.showModal();
+    initSearch();
+    setTimeout(focusInput, 60);
+  }
+
+  // Open triggers: any [data-search-open] control.
+  document.querySelectorAll('[data-search-open]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      openSearch();
+    });
+  });
+
+  // ⌘K / Ctrl+K
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+  });
+
+  // Close controls + click-outside.
+  dialog?.querySelector('[data-search-close]')?.addEventListener('click', () =>
+    dialog.close(),
+  );
+  dialog?.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+</script>

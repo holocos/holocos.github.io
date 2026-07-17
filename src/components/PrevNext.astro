@@ -1,0 +1,51 @@
+---
+interface Link {
+  id: string;
+  title: string;
+}
+interface Props {
+  prev?: Link;
+  next?: Link;
+}
+const { prev, next } = Astro.props;
+---
+
+<nav
+  class="mt-16 grid gap-4 border-t border-border pt-8 sm:grid-cols-2"
+  aria-label="Doctrine navigation"
+>
+  {
+    prev ? (
+      <a
+        href={`/teachings/${prev.id}/`}
+        class="group flex flex-col rounded-xl border border-border bg-bg-raised p-4 no-underline transition-colors hover:border-accent/40 hover:no-underline"
+      >
+        <span class="text-xs font-medium uppercase tracking-wide text-text-muted">
+          ← Previous
+        </span>
+        <span class="mt-1 font-serif text-base text-text transition-colors group-hover:text-accent">
+          {prev.title}
+        </span>
+      </a>
+    ) : (
+      <span />
+    )
+  }
+  {
+    next ? (
+      <a
+        href={`/teachings/${next.id}/`}
+        class="group flex flex-col rounded-xl border border-border bg-bg-raised p-4 text-right no-underline transition-colors hover:border-accent/40 hover:no-underline sm:col-start-2"
+      >
+        <span class="text-xs font-medium uppercase tracking-wide text-text-muted">
+          Next →
+        </span>
+        <span class="mt-1 font-serif text-base text-text transition-colors group-hover:text-accent">
+          {next.title}
+        </span>
+      </a>
+    ) : (
+      <span />
+    )
+  }
+</nav>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Seed questions from plan §7; answers are placeholders for Joseph.
+const faqs = [
+  {
+    q: 'Do Message believers worship William Branham?',
+    a: 'E pluribus unum.',
+  },
+  {
+    q: 'Is this a denomination?',
+    a: 'E pluribus unum.',
+  },
+  {
+    q: 'What do you believe about the Bible?',
+    a: 'E pluribus unum.',
+  },
+  {
+    q: "What is 'the Message'?",
+    a: 'E pluribus unum.',
+  },
+  {
+    q: 'How does this differ from mainstream Pentecostalism?',
+    a: 'E pluribus unum.',
+  },
+];
+---
+
+<BaseLayout
+  title="FAQ"
+  description="Common questions about the Message and these teachings, plainly answered."
+>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:py-16">
+    <header>
+      <p class="text-sm font-medium uppercase tracking-widest text-accent">
+        Questions
+      </p>
+      <h1 class="mt-4 text-4xl font-semibold sm:text-5xl">
+        Frequently Asked Questions
+      </h1>
+      <p class="mt-5 text-lg leading-relaxed text-text-muted">
+        Sincere questions, plainly answered. If you don't find yours here, the
+        teachings themselves go deeper — each one established on Scripture.
+      </p>
+    </header>
+
+    <div class="mt-10 divide-y divide-border border-y border-border">
+      {
+        faqs.map((item) => (
+          <details class="group py-2">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 font-serif text-lg font-medium text-text marker:hidden">
+              {item.q}
+              <svg
+                class="h-5 w-5 shrink-0 text-text-muted transition-transform duration-200 group-open:rotate-45"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <div class="pb-5 text-[15px] leading-relaxed text-text-muted">
+              {item.a}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

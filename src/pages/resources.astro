@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Only URLs verified as canonical are linked; the rest are marked "Link
+// pending" rather than pointing somewhere uncertain (plan §10 — verifiable).
+interface Resource {
+  title: string;
+  description: string;
+  href?: string;
+}
+const groups: { heading: string; items: Resource[] }[] = [
+  {
+    heading: 'Listen',
+    items: [
+      {
+        title: 'Voice of God Recordings',
+        description:
+          'The official archive: audio and text of every recorded sermon, freely available.',
+        href: 'https://www.branham.org',
+      },
+      {
+        title: 'The Table',
+        description:
+          'Sermon text and audio together in a searchable study app.',
+      },
+    ],
+  },
+  {
+    heading: 'Read',
+    items: [
+      {
+        title: 'The Church Age Book (PDF)',
+        description:
+          '“An Exposition of the Seven Church Ages” in book form for study.',
+      },
+      {
+        title: 'Sermon Transcripts',
+        description:
+          'Printed transcripts of the recorded messages, searchable by title and date.',
+        href: 'https://www.branham.org',
+      },
+    ],
+  },
+  {
+    heading: 'Study',
+    items: [
+      {
+        title: 'Find a Local Church',
+        description:
+          'A note on locating a Message-believing fellowship in your area.',
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Resources"
+  description="Where to listen, read, and study the Message and the Word."
+>
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:py-16">
+    <header>
+      <p class="text-sm font-medium uppercase tracking-widest text-accent">
+        Resources
+      </p>
+      <h1 class="mt-4 text-4xl font-semibold sm:text-5xl">Listen, Read, Study</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
+        Trusted places to hear the sermons in Brother Branham's own voice, read
+        the messages, and go deeper in the Word.
+      </p>
+    </header>
+
+    <div class="mt-12 space-y-14">
+      {
+        groups.map((group) => (
+          <section aria-labelledby={`group-${group.heading}`}>
+            <h2
+              id={`group-${group.heading}`}
+              class="border-b border-border pb-3 font-serif text-2xl font-semibold"
+            >
+              {group.heading}
+            </h2>
+            <div class="mt-6 grid gap-5 sm:grid-cols-2">
+              {group.items.map((item) =>
+                item.href ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group flex flex-col rounded-2xl border border-border bg-bg-raised p-6 no-underline transition duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-lg hover:no-underline"
+                  >
+                    <div class="flex items-start justify-between gap-3">
+                      <h3 class="font-serif text-lg font-semibold text-text transition-colors group-hover:text-accent">
+                        {item.title}
+                      </h3>
+                      <svg class="mt-1 h-4 w-4 shrink-0 text-text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M7 17 17 7M7 7h10v10" />
+                      </svg>
+                    </div>
+                    <p class="mt-2 text-[15px] leading-relaxed text-text-muted">
+                      {item.description}
+                    </p>
+                  </a>
+                ) : (
+                  <div class="flex flex-col rounded-2xl border border-dashed border-border bg-bg-subtle p-6">
+                    <div class="flex items-start justify-between gap-3">
+                      <h3 class="font-serif text-lg font-semibold text-text">
+                        {item.title}
+                      </h3>
+                      <span class="shrink-0 rounded-full border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-text-muted">
+                        Link pending
+                      </span>
+                    </div>
+                    <p class="mt-2 text-[15px] leading-relaxed text-text-muted">
+                      {item.description}
+                    </p>
+                  </div>
+                ),
+              )}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

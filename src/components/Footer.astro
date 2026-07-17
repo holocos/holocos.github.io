@@ -1,0 +1,51 @@
+---
+const year = new Date().getFullYear();
+
+const nav = [
+  { href: '/teachings/', label: 'Teachings' },
+  { href: '/about/', label: 'About' },
+  { href: '/faq/', label: 'FAQ' },
+  { href: '/resources/', label: 'Resources' },
+];
+---
+
+<footer class="mt-24 border-t border-border bg-bg-subtle">
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <!-- Scripture verse of the site (plan §3) -->
+    <blockquote class="mx-auto max-w-2xl text-center">
+      <p class="font-serif text-lg italic text-text">
+        &ldquo;Jesus Christ the same yesterday, and to day, and for ever.&rdquo;
+      </p>
+      <cite class="mt-2 block text-sm not-italic text-accent">Hebrews 13:8</cite>
+    </blockquote>
+
+    <div class="mt-10 flex flex-col items-center gap-6 border-t border-border pt-8 text-center sm:flex-row sm:justify-between sm:text-left">
+      <div>
+        <p class="font-serif text-base font-semibold text-text">
+          Message <span class="text-accent">&amp;</span> Scripture
+        </p>
+        <p class="mt-1 max-w-md text-sm text-text-muted">
+          The teachings and revelations of William Branham, established on the
+          Word of God.
+        </p>
+      </div>
+
+      <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2" aria-label="Footer">
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              class="text-sm text-text-muted transition-colors hover:text-text no-underline hover:no-underline"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+
+    <p class="mt-8 text-center text-xs text-text-muted sm:text-left">
+      &copy; {year} &middot; Scripture quoted from the King James Version.
+    </p>
+  </div>
+</footer>

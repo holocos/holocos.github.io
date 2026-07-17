@@ -1,0 +1,241 @@
+@import 'tailwindcss';
+
+/* Dark mode is driven by a `.dark` class on <html> (set by the no-flash
+   inline script + theme toggle), not by the OS preference alone. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens (plan §6.2). Defined as CSS variables so a single edit
+   re-themes the whole site. Light mode is the default; `.dark` overrides.
+--------------------------------------------------------------------------- */
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #f5f5f4;
+  --bg-raised: #ffffff;
+  --border: #e5e5e3;
+  --text: #1c1c1e;
+  --text-muted: #6b6b6e;
+  --accent: #8a6f47; /* muted bronze/gold */
+  --accent-strong: #6e5836; /* deeper bronze for small text on --accent-soft (AA) */
+  --accent-soft: #f3eee5;
+  --on-accent: #ffffff; /* readable text on the accent (buttons) */
+
+  --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+.dark {
+  --bg: #1c1c1e; /* very dark gray, never pure black */
+  --bg-subtle: #242426;
+  --bg-raised: #2c2c2e;
+  --border: #3a3a3c;
+  --text: #ededeb;
+  --text-muted: #a5a5a8;
+  --accent: #c4a265;
+  --accent-strong: #c4a265; /* dark-mode accent already meets AA on --accent-soft */
+  --accent-soft: #33302a;
+  --on-accent: #1c1c1e; /* dark text on the lighter dark-mode accent */
+}
+
+/* Expose tokens to Tailwind's utility layer so `bg-bg`, `text-muted`,
+   `border-border`, `text-accent`, etc. all work. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-raised: var(--bg-raised);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+}
+
+/* ---------------------------------------------------------------------------
+   Base element styling — kept in @layer base so Tailwind utilities (which live
+   in @layer utilities) can override element defaults. Unlayered rules would
+   otherwise beat every utility class regardless of specificity.
+--------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Smooth theme change (plan §6.5). */
+    transition:
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    color: var(--text);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Respect reduced-motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Prose — styling for rendered doctrine bodies (Markdown/MDX output).
+   Kept intentionally simple; Scripture/SermonQuote/Note carry their own styles.
+--------------------------------------------------------------------------- */
+.prose {
+  max-width: 68ch;
+  color: var(--text);
+}
+.prose > :first-child {
+  margin-top: 0;
+}
+.prose p {
+  margin: 1.25em 0;
+}
+.prose h2 {
+  font-size: 1.75rem;
+  margin: 2em 0 0.6em;
+  scroll-margin-top: 5rem;
+}
+.prose h3 {
+  font-size: 1.375rem;
+  margin: 1.6em 0 0.5em;
+  scroll-margin-top: 5rem;
+}
+.prose ul,
+.prose ol {
+  margin: 1.25em 0;
+  padding-left: 1.5em;
+}
+.prose ul {
+  list-style: disc;
+}
+.prose ol {
+  list-style: decimal;
+}
+.prose li {
+  margin: 0.4em 0;
+}
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.prose hr {
+  margin: 2.5em 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+.prose blockquote {
+  margin: 1.5em 0;
+  padding-left: 1.25em;
+  border-left: 3px solid var(--border);
+  color: var(--text-muted);
+  font-style: italic;
+}
+.prose code {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: var(--bg-subtle);
+  padding: 0.15em 0.4em;
+  border-radius: 0.3em;
+}
+
+/* ---------------------------------------------------------------------------
+   Pagefind UI — mapped onto our design tokens so search matches the site in
+   both themes (plan §7). Applied wherever the .pf-search wrapper is used.
+--------------------------------------------------------------------------- */
+.pf-search {
+  --pagefind-ui-primary: var(--accent);
+  --pagefind-ui-text: var(--text);
+  --pagefind-ui-background: var(--bg-raised);
+  --pagefind-ui-border: var(--border);
+  --pagefind-ui-tag: var(--bg-subtle);
+  --pagefind-ui-border-radius: 0.6rem;
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-font: var(--font-sans);
+}
+.pf-search .pagefind-ui__result-title {
+  font-family: var(--font-serif);
+}
+.pf-search .pagefind-ui__result-link {
+  color: var(--text);
+}
+
+/* Search dialog (⌘K) */
+#search-dialog {
+  margin: 8vh auto 0; /* 8vh from top, centered horizontally */
+  width: min(40rem, calc(100vw - 2rem));
+  max-height: 80vh;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--bg-raised);
+  color: var(--text);
+  overflow: hidden;
+}
+#search-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+/* Skip link (accessibility) — visible only on focus. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--bg-raised);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}

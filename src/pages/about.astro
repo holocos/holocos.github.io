@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Milestone years are factual scaffolding; the descriptions are placeholders
+// for Joseph to write (plan §7 — "Placeholder text initially").
+const timeline = [
+  { year: '1909', label: 'Birth', body: 'E pluribus unum.' },
+  { year: '1933', label: 'Early ministry', body: 'E pluribus unum.' },
+  { year: '1946', label: 'The commission', body: 'E pluribus unum.' },
+  { year: '1947–1955', label: 'The healing revival', body: 'E pluribus unum.' },
+  { year: '1960', label: 'The Seven Church Ages', body: 'E pluribus unum.' },
+  { year: '1963', label: 'The opening of the Seals', body: 'E pluribus unum.' },
+  { year: '1965', label: 'His passing', body: 'E pluribus unum.' },
+  { year: 'Today', label: 'The continuing Message', body: 'E pluribus unum.' },
+];
+---
+
+<BaseLayout
+  title="About"
+  description="A brief biography and ministry overview of William Marrion Branham."
+>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:py-16">
+    <header>
+      <p class="text-sm font-medium uppercase tracking-widest text-accent">About</p>
+      <h1 class="mt-4 text-4xl font-semibold sm:text-5xl">
+        William Marrion Branham
+      </h1>
+      <p class="mt-5 text-lg leading-relaxed text-text-muted">
+        A brief overview of his life and ministry — from his early years and the
+        1946 commission, through the healing revival, to the revelation of the
+        Seals in 1963 and the Message that continues today.
+      </p>
+    </header>
+
+    <hr class="my-10 border-border" />
+
+    <div class="prose">
+      <h2>Early Life</h2>
+      <p>E pluribus unum.</p>
+
+      <h2>The Commission</h2>
+      <p>E pluribus unum.</p>
+
+      <h2>The Healing Revival</h2>
+      <p>E pluribus unum.</p>
+
+      <h2>The Vindicated Ministry</h2>
+      <p>E pluribus unum.</p>
+
+      <h2>1963 and the Seals</h2>
+      <p>E pluribus unum.</p>
+
+      <h2>His Passing and the Continuing Message</h2>
+      <p>E pluribus unum.</p>
+    </div>
+
+    <!-- Timeline -->
+    <section class="mt-14" aria-labelledby="timeline">
+      <h2 id="timeline" class="font-serif text-2xl font-semibold">Timeline</h2>
+      <ol class="mt-6 border-l border-border">
+        {
+          timeline.map((t) => (
+            <li class="relative pb-8 pl-8 last:pb-0">
+              <span
+                class="absolute -left-[6px] top-1.5 h-3 w-3 rounded-full border-2 border-accent bg-bg"
+                aria-hidden="true"
+              />
+              <p class="text-sm font-semibold text-accent">{t.year}</p>
+              <p class="mt-0.5 font-serif text-lg text-text">{t.label}</p>
+              <p class="mt-1 text-[15px] leading-relaxed text-text-muted">
+                {t.body}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+  </div>
+</BaseLayout>

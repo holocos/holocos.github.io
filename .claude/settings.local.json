@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npx astro *)",
+      "Bash(node -e \"console.log\\('mdx', require\\('./node_modules/@astrojs/mdx/package.json'\\).version\\); console.log\\('tailwind', require\\('./node_modules/tailwindcss/package.json'\\).version\\)\")",
+      "Bash(pkill -f \"astro dev\")"
+    ]
+  }
+}

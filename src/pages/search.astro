@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Search"
+  description="Search the teachings, summaries, and Scripture references."
+  noIndex={true}
+>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:py-16">
+    <header>
+      <p class="text-sm font-medium uppercase tracking-widest text-accent">Search</p>
+      <h1 class="mt-4 text-4xl font-semibold sm:text-5xl">Search the Teachings</h1>
+      <p class="mt-4 text-lg leading-relaxed text-text-muted">
+        Search across every doctrine — titles, summaries, body text, and
+        Scripture references. Tip: press <kbd class="rounded border border-border bg-bg-subtle px-1.5 py-0.5 text-sm">⌘K</kbd>
+        anywhere to search.
+      </p>
+    </header>
+
+    <div class="pf-search mt-10">
+      <div id="pagefind-search-page"></div>
+      <p id="search-page-fallback" hidden class="py-8 text-center text-text-muted">
+        Search is generated at build time. Run
+        <code class="rounded bg-bg-subtle px-1.5 py-0.5">npm run build &amp;&amp; npm run preview</code>
+        to try it locally — it works fully on the deployed site.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const fallback = document.getElementById('search-page-fallback');
+
+  const css = document.createElement('link');
+  css.rel = 'stylesheet';
+  css.href = '/pagefind/pagefind-ui.css';
+  document.head.appendChild(css);
+
+  const script = document.createElement('script');
+  script.src = '/pagefind/pagefind-ui.js';
+  script.onload = () => {
+    // @ts-expect-error — global provided by pagefind-ui.js
+    new window.PagefindUI({
+      element: '#pagefind-search-page',
+      showSubResults: true,
+      showImages: false,
+      resetStyles: false,
+    });
+  };
+  script.onerror = () => {
+    if (fallback) fallback.hidden = false;
+  };
+  document.head.appendChild(script);
+</script>

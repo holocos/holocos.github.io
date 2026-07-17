@@ -1,0 +1,134 @@
+---
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../../content.config';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DoctrineCard from '../../components/DoctrineCard.astro';
+
+const teachings = await getCollection('teachings');
+
+// Stable id for anchors / filter targeting.
+const slugifyCategory = (c: string) =>
+  c
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+// Group by category in the canonical order (plan §4), sorted within by order.
+const grouped = CATEGORIES.map((category) => ({
+  category,
+  slug: slugifyCategory(category),
+  entries: teachings
+    .filter((t) => t.data.category === category)
+    .sort((a, b) => a.data.order - b.data.order),
+})).filter((g) => g.entries.length > 0);
+---
+
+<BaseLayout
+  title="Teachings"
+  description="The core doctrines and revelations taught by William Branham, each explained plainly and supported by Scripture."
+>
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:py-16">
+    <header class="max-w-2xl">
+      <h1 class="text-4xl font-semibold sm:text-5xl">The Teachings</h1>
+      <p class="mt-4 text-lg leading-relaxed text-text-muted">
+        The core doctrines and revelations of the Message, each explained in
+        plain language and established on the Word of God. Choose a category or
+        browse them all.
+      </p>
+    </header>
+
+    <!-- Category filter pills (plan §7) -->
+    <div
+      id="category-filter"
+      class="mt-8 flex flex-wrap gap-2"
+      role="group"
+      aria-label="Filter by category"
+    >
+      <button
+        type="button"
+        data-filter="all"
+        aria-pressed="true"
+        class="filter-pill rounded-full border border-accent bg-accent-soft px-4 py-1.5 text-sm font-medium text-accent-strong transition-colors"
+      >
+        All
+      </button>
+      {
+        grouped.map((g) => (
+          <button
+            type="button"
+            data-filter={g.slug}
+            aria-pressed="false"
+            class="filter-pill rounded-full border border-border px-4 py-1.5 text-sm font-medium text-text-muted transition-colors hover:text-text hover:bg-bg-subtle"
+          >
+            {g.category}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Grouped doctrine sections -->
+    <div class="mt-12 space-y-16">
+      {
+        grouped.map((g) => (
+          <section
+            id={g.slug}
+            data-category={g.slug}
+            class="category-section scroll-mt-24"
+            aria-labelledby={`${g.slug}-heading`}
+          >
+            <div class="flex items-baseline justify-between gap-4 border-b border-border pb-3">
+              <h2 id={`${g.slug}-heading`} class="font-serif text-2xl font-semibold">
+                {g.category}
+              </h2>
+              <span class="shrink-0 text-sm text-text-muted">
+                {g.entries.length}{' '}
+                {g.entries.length === 1 ? 'teaching' : 'teachings'}
+              </span>
+            </div>
+            <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {g.entries.map((entry) => (
+                <DoctrineCard entry={entry} />
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const pills = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
+  const sections =
+    document.querySelectorAll<HTMLElement>('.category-section');
+
+  const activeClasses = ['border-accent', 'bg-accent-soft', 'text-accent-strong'];
+  const idleClasses = [
+    'border-border',
+    'text-text-muted',
+    'hover:text-text',
+    'hover:bg-bg-subtle',
+  ];
+
+  function setActive(pill: HTMLButtonElement) {
+    pills.forEach((p) => {
+      const on = p === pill;
+      p.setAttribute('aria-pressed', String(on));
+      p.classList.toggle(activeClasses[0], on);
+      p.classList.toggle(activeClasses[1], on);
+      p.classList.toggle(activeClasses[2], on);
+      idleClasses.forEach((c) => p.classList.toggle(c, !on));
+    });
+  }
+
+  pills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      const filter = pill.dataset.filter;
+      setActive(pill);
+      sections.forEach((section) => {
+        const show = filter === 'all' || section.dataset.category === filter;
+        section.classList.toggle('hidden', !show);
+      });
+    });
+  });
+</script>

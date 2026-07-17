@@ -1,0 +1,159 @@
+---
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../content.config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DoctrineCard from '../components/DoctrineCard.astro';
+
+const teachings = await getCollection('teachings');
+
+const slugifyCategory = (c: string) =>
+  c
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+// One-line descriptors for the category grid.
+const descriptions: Record<string, string> = {
+  'The Godhead & the Word':
+    'One God, the authority of His Word, and the Seed that reproduces His life.',
+  'Salvation & the New Birth':
+    'The new birth, election, and eternal life as the very Seed of God.',
+  'The Fall & the Enemy':
+    'The origin of sin, the two seeds, and the spirit of organized religion.',
+  'The Church & Its History':
+    'The seven church ages, the Bride, and the light of the evening time.',
+  'Prophecy & the End Time':
+    "The Seals, the rapture, and God's prophetic clock for the last days.",
+  'Christian Living & Ordinances':
+    'Divine healing, holiness, and the ordinances kept by the church.',
+};
+
+const categories = CATEGORIES.map((category) => ({
+  category,
+  slug: slugifyCategory(category),
+  description: descriptions[category],
+  count: teachings.filter((t) => t.data.category === category).length,
+}));
+
+// A short, representative set of featured doctrines.
+const featuredIds = ['godhead', 'serpents-seed', 'seven-church-ages', 'the-seven-seals'];
+const featured = featuredIds
+  .map((id) => teachings.find((t) => t.id === id))
+  .filter((t): t is (typeof teachings)[number] => Boolean(t));
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="mx-auto max-w-4xl px-4 pt-20 pb-16 text-center sm:px-6 sm:pt-28">
+    <p class="text-sm font-medium uppercase tracking-widest text-accent">
+      The Teachings of William Branham
+    </p>
+    <h1 class="mt-5 text-4xl font-semibold leading-tight sm:text-6xl">
+      Message <span class="text-accent">&amp;</span> Scripture
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-muted sm:text-xl">
+      The teachings and revelations of William Branham, explained in plain
+      language and established, verse by verse, on the Word of God.
+    </p>
+
+    <figure class="mx-auto mt-10 max-w-xl">
+      <blockquote class="font-serif text-xl italic leading-relaxed text-text sm:text-2xl">
+        &ldquo;Surely the Lord God will do nothing, but he revealeth his secret
+        unto his servants the prophets.&rdquo;
+      </blockquote>
+      <figcaption class="mt-3 text-sm font-medium text-accent">Amos 3:7</figcaption>
+    </figure>
+
+    <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <a
+        href="/teachings/"
+        class="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-3 text-base font-medium text-on-accent no-underline transition-opacity hover:opacity-90 hover:no-underline"
+      >
+        Explore the Teachings
+      </a>
+      <a
+        href="/teachings/godhead/"
+        class="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-base font-medium text-text no-underline transition-colors hover:bg-bg-subtle hover:no-underline"
+      >
+        Start with the Godhead
+      </a>
+    </div>
+  </section>
+
+  <!-- Category grid -->
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6" aria-labelledby="cats">
+    <h2 id="cats" class="font-serif text-2xl font-semibold sm:text-3xl">
+      Six Areas of Study
+    </h2>
+    <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        categories.map((c) => (
+          <a
+            href={`/teachings/#${c.slug}`}
+            class="group flex flex-col rounded-2xl border border-border bg-bg-raised p-6 no-underline transition duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-lg hover:no-underline"
+          >
+            <h3 class="font-serif text-xl font-semibold text-text transition-colors group-hover:text-accent">
+              {c.category}
+            </h3>
+            <p class="mt-2 flex-1 text-[15px] leading-relaxed text-text-muted">
+              {c.description}
+            </p>
+            <p class="mt-4 text-sm font-medium text-accent">
+              {c.count} {c.count === 1 ? 'teaching' : 'teachings'} →
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Scripture strip -->
+  <section class="my-12 border-y border-border bg-bg-subtle">
+    <div class="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
+      <blockquote class="font-serif text-2xl italic leading-relaxed text-text sm:text-3xl">
+        &ldquo;The path of the just is as the shining light, that shineth more
+        and more unto the perfect day.&rdquo;
+      </blockquote>
+      <p class="mt-4 text-sm font-medium text-accent">Proverbs 4:18</p>
+    </div>
+  </section>
+
+  <!-- Featured doctrines -->
+  {
+    featured.length > 0 && (
+      <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6" aria-labelledby="featured">
+        <div class="flex items-baseline justify-between gap-4">
+          <h2 id="featured" class="font-serif text-2xl font-semibold sm:text-3xl">
+            Where to Begin
+          </h2>
+          <a href="/teachings/" class="shrink-0 text-sm font-medium text-accent no-underline hover:underline">
+            View all →
+          </a>
+        </div>
+        <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {featured.map((entry) => (
+            <DoctrineCard entry={entry} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Brief intro -->
+  <section class="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
+    <h2 class="font-serif text-2xl font-semibold sm:text-3xl">
+      The Word First
+    </h2>
+    <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-text-muted">
+      Every doctrine here pairs the teaching with its biblical foundation.
+      Revelations not spelled out plainly in Scripture are presented as such —
+      shown to be in harmony with the Word, never contradicting it.
+    </p>
+    <a
+      href="/about/"
+      class="mt-6 inline-flex items-center text-base font-medium text-accent no-underline hover:underline"
+    >
+      About William Branham &amp; this site →
+    </a>
+  </section>
+</BaseLayout>

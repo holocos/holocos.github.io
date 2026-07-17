@@ -1,0 +1,22 @@
+---
+// Scripture block — the MOST prominent quote treatment (plan §5, §6.3).
+// Serif italic, accent left border, reference badge. Scripture is quoted KJV.
+interface Props {
+  ref?: string;
+}
+const { ref } = Astro.props;
+---
+
+<figure class="my-7 rounded-r-lg border-l-4 border-accent bg-accent-soft/50 py-4 pl-6 pr-5">
+  <blockquote class="font-serif text-xl italic leading-relaxed text-text">
+    <slot />
+  </blockquote>
+  {
+    ref && (
+      <figcaption class="mt-3 text-sm font-semibold not-italic text-accent">
+        {ref}
+        <span class="ml-1 font-normal text-text-muted">KJV</span>
+      </figcaption>
+    )
+  }
+</figure>
