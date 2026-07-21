@@ -1,13 +1,12 @@
-# Message & Scripture
+# Themelios
 
-A clean, modern reference site presenting the core doctrines and revelations taught by
-William Marrion Branham, each explained in plain language and supported by Scripture.
-Every doctrine page pairs the teaching with its biblical foundation.
+A Scripture-first resource on the truths of God's Word — for all believers, including
+much that Brother Branham taught. Every doctrine page pairs the teaching with its
+biblical foundation.
 
-> **Working name.** "Message & Scripture" is a placeholder used in the header, footer,
-> and page titles. Pick a final name and update the wordmark in
-> `src/components/Header.astro`, `src/components/Footer.astro`, and the default title in
-> `src/layouts/BaseLayout.astro`.
+> The name is from the Greek θεμέλιος (*themelios*), "foundation" — as in
+> 1 Corinthians 3:11: "For other foundation can no man lay than that is laid, which is
+> Jesus Christ."
 
 ## Tech stack
 
@@ -120,6 +119,5 @@ Any static host works. Build settings:
    (or the host subdomain, e.g. `https://your-project.pages.dev`). This feeds canonical
    links, Open Graph tags, and the sitemap. Update the `Sitemap:` line in
    `public/robots.txt` to match.
-2. **Pick the final site name** (see note at top).
-3. **Review draft handling** — decide whether to keep showing drafts or add a filter.
-4. Content must pass through Joseph before flipping `draft: false`.
+2. **Review draft handling** — decide whether to keep showing drafts or add a filter.
+3. Content must pass through Joseph before flipping `draft: false`.

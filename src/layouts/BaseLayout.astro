@@ -14,13 +14,13 @@ interface Props {
 }
 
 const {
-  title = 'Message & Scripture',
+  title = 'Themelios',
   description = 'The teachings and revelations of William Branham, established on the Word of God.',
   noIndex = false,
 } = Astro.props;
 
 const fullTitle =
-  title === 'Message & Scripture' ? title : `${title} · Message & Scripture`;
+  title === 'Themelios' ? title : `${title} · Themelios`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
 ---
 
@@ -39,7 +39,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Message & Scripture" />
+    <meta property="og:site_name" content="Themelios" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
