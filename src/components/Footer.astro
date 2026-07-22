@@ -1,4 +1,6 @@
 ---
+import Logo from './Logo.astro';
+
 const year = new Date().getFullYear();
 
 const nav = [
@@ -21,7 +23,8 @@ const nav = [
 
     <div class="mt-10 flex flex-col items-center gap-6 border-t border-border pt-8 text-center sm:flex-row sm:justify-between sm:text-left">
       <div>
-        <p class="font-serif text-base font-semibold text-text">
+        <p class="flex items-center justify-center gap-2.5 font-serif text-base font-semibold text-text sm:justify-start">
+          <Logo size={28} />
           Themelios
         </p>
         <p class="mt-1 max-w-md text-sm text-text-muted">
