@@ -15,6 +15,7 @@
   --border: #e5e5e3;
   --text: #1c1c1e;
   --text-muted: #6b6b6e;
+  --text-quote: #4a4a4d; /* sustained reading (sermon quotes): quieter than body, clearer than muted */
   --accent: #8a6f47; /* muted bronze/gold */
   --accent-strong: #6e5836; /* deeper bronze for small text on --accent-soft (AA) */
   --accent-soft: #f3eee5;
@@ -31,6 +32,7 @@
   --border: #3a3a3c;
   --text: #ededeb;
   --text-muted: #a5a5a8;
+  --text-quote: #c9c9c6;
   --accent: #c4a265;
   --accent-strong: #c4a265; /* dark-mode accent already meets AA on --accent-soft */
   --accent-soft: #33302a;
@@ -46,6 +48,7 @@
   --color-border: var(--border);
   --color-text: var(--text);
   --color-text-muted: var(--text-muted);
+  --color-text-quote: var(--text-quote);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-soft: var(--accent-soft);
@@ -169,7 +172,10 @@
   border: 0;
   border-top: 1px solid var(--border);
 }
-.prose blockquote {
+/* Direct children only — Scripture/SermonQuote wrap their own <blockquote> in a
+   <figure> and style it themselves. A descendant selector here would double the
+   border and mute Scripture, which must stay the most prominent quote. */
+.prose > blockquote {
   margin: 1.5em 0;
   padding-left: 1.25em;
   border-left: 3px solid var(--border);
