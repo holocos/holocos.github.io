@@ -1,6 +1,7 @@
 ---
 title: "The Two Books"
-category: "Salvation & the New Birth"
+indexTitle: "the Two Books"
+category: "The Foundations of the Faith"
 summary: "Scripture speaks of the Book of Life and the Lamb's Book of Life; the difference between them reveals who is redeemed by predestination and who is not."
 keyScriptures:
   - "Revelation 13:8"

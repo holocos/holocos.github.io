@@ -1,6 +1,7 @@
 ---
 title: "The Original Sin (Serpent's Seed)"
-category: "The Fall & the Enemy"
+indexTitle: "the Serpent's Seed"
+category: "The Foundations of the Faith"
 summary: "The original sin in Eden was not the eating of literal fruit but a defilement — the beguiling of Eve by the serpent — from which two seeds have grown through human history."
 keyScriptures:
   - "Genesis 3:1-6"

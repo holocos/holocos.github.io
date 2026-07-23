@@ -1,6 +1,7 @@
 ---
 title: "Eternal Life as God's Own Seed"
-category: "Salvation & the New Birth"
+indexTitle: "Eternal Life, God's Own Seed"
+category: "The Foundations of the Faith"
 summary: "The elect are attributes of God's own thought — a portion of His eternal Life; of soul, spirit, and body, only the germ of God's Life is truly eternal."
 keyScriptures:
   - "1 John 3:9"

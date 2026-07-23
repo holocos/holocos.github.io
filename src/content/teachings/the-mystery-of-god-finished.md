@@ -1,6 +1,7 @@
 ---
 title: "The Mystery of God Finished"
-category: "Prophecy & the End Time"
+indexTitle: "the Mystery of God Finished"
+category: "The Revealed Mysteries"
 summary: "The seventh angel's message finishes the mystery of God declared to the prophets — gathering up the loose ends of the reformers and revealing Christ fully in His Word."
 keyScriptures:
   - "Revelation 10:7"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "The Seventh Seal"
     date: "1963-03-24"
     reference: "63-0324E, para. 60"
-order: 18
+order: 15
 draft: true
 ---
 

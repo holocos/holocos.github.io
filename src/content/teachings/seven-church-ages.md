@@ -1,6 +1,7 @@
 ---
 title: "The Seven Church Ages"
-category: "The Church & Its History"
+indexTitle: "the Seven Church Ages"
+category: "The Revealed Mysteries"
 summary: "The seven churches of Revelation 2–3 are seven successive ages of church history, each with its messenger and its measure of the Word, closing in the Laodicean age."
 keyScriptures:
   - "Revelation 1:20"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "The Laodicean Church Age"
     date: "1960-12-11"
     reference: "60-1211E, para. 80"
-order: 13
+order: 14
 draft: true
 ---
 

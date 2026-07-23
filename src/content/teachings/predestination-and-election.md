@@ -1,6 +1,7 @@
 ---
 title: "Predestination & Election"
-category: "Salvation & the New Birth"
+indexTitle: "Predestination & Election"
+category: "The Foundations of the Faith"
 summary: "By foreknowledge God elected a people to salvation before the foundation of the world; the security of the elect rests on His unchanging purpose, not human effort."
 keyScriptures:
   - "Ephesians 1:4-5"

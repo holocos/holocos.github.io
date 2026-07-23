@@ -1,21 +1,26 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// The six doctrine categories (see plan §4). Kept as a const tuple so the
-// schema can validate against it and other code can import the list.
+// The four teaching sections, in display order. Kept as a const tuple so the
+// schema can validate against it and other code can import the list. The
+// "completing sentence" lead phrase for each ("The Doctrine of…") lives only in
+// the Teachings index, so the stored data stays clean.
 export const CATEGORIES = [
-  'The Godhead & the Word',
-  'Salvation & the New Birth',
-  'The Fall & the Enemy',
-  'The Church & Its History',
+  'The Foundations of the Faith',
+  'The Revealed Mysteries',
   'Prophecy & the End Time',
-  'Christian Living & Ordinances',
+  "The Believer's Walk",
 ] as const;
 
 const teachings = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/teachings' }),
   schema: z.object({
     title: z.string(),
+    // Short phrase that completes the section banner on the Teachings index
+    // (e.g. "the Godhead" → "The Doctrine of the Godhead"). Falls back to
+    // `title` when absent. The full `title` is still used for the doctrine
+    // page <h1>, the category badge, and prev/next.
+    indexTitle: z.string().optional(),
     category: z.enum(CATEGORIES),
     summary: z.string(),
     keyScriptures: z.array(z.string()).default([]),

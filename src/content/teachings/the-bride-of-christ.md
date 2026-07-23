@@ -1,6 +1,7 @@
 ---
 title: "The Bride of Christ"
-category: "The Church & Its History"
+indexTitle: "the Bride of Christ"
+category: "The Revealed Mysteries"
 summary: "The Bride is the predestinated, called-out Word Bride of this hour — those wholly agreed with the Word, being made ready for the coming of the Bridegroom."
 keyScriptures:
   - "Ephesians 5:25-27"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "Christ Is The Mystery Of God Revealed"
     date: "1963-07-28"
     reference: "63-0728, para. 260"
-order: 14
+order: 21
 draft: true
 ---
 

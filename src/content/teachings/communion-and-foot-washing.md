@@ -1,6 +1,7 @@
 ---
 title: "Communion & Foot Washing"
-category: "Christian Living & Ordinances"
+indexTitle: "Communion & Foot Washing"
+category: "The Believer's Walk"
 summary: "The church keeps the ordinances Christ instituted — the communion of the Lord's supper and the washing of the saints' feet — in remembrance and humility until He comes."
 keyScriptures:
   - "1 Corinthians 11:23-26"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "Questions And Answers"
     date: "1964-08-23"
     reference: "64-0823E, para. 20"
-order: 28
+order: 29
 draft: true
 ---
 

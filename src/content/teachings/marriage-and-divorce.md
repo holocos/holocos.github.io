@@ -1,6 +1,7 @@
 ---
 title: "Marriage & Divorce"
-category: "Christian Living & Ordinances"
+indexTitle: "Marriage & Divorce"
+category: "The Believer's Walk"
 summary: "The 1965 revelation on marriage and divorce traces the ordinance back to Eden, distinguishing God's original law of creation from the permissions given under the law."
 keyScriptures:
   - "Matthew 19:4-6"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "Questions And Answers On Marriage And Divorce"
     date: "1965-02-27"
     reference: "65-0227, para. 15"
-order: 26
+order: 27
 draft: true
 ---
 

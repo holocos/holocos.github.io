@@ -1,5 +1,6 @@
 ---
 title: "The Rapture"
+indexTitle: "the Rapture"
 category: "Prophecy & the End Time"
 summary: "The rapture comes in three stages — a shout, a voice, and a trump — the Message gathering the Bride, the resurrection of the sleeping saints, and the catching away."
 keyScriptures:
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "The Future Home Of The Heavenly Bridegroom And The Earthly Bride"
     date: "1964-08-02"
     reference: "64-0802, para. 130"
-order: 19
+order: 23
 draft: true
 ---
 

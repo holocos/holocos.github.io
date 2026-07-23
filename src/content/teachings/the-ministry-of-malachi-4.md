@@ -1,6 +1,7 @@
 ---
 title: "The Ministry of Malachi 4"
-category: "Prophecy & the End Time"
+indexTitle: "the Ministry of Malachi 4"
+category: "The Revealed Mysteries"
 summary: "Malachi promised Elijah would come before the great and dreadful day of the Lord to turn the hearts of the children back to the faith of the apostolic fathers — a ministry fulfilled in this last age."
 keyScriptures:
   - "Malachi 4:5-6"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "Souls That Are In Prison Now"
     date: "1963-11-10"
     reference: "63-1110M, para. 80"
-order: 29
+order: 16
 draft: true
 ---
 

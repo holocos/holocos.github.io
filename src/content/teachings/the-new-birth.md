@@ -1,6 +1,7 @@
 ---
 title: "The New Birth & the Baptism of the Holy Ghost"
-category: "Salvation & the New Birth"
+indexTitle: "the New Birth"
+category: "The Foundations of the Faith"
 summary: "The new birth is a genuine spiritual death, burial, and resurrection — receiving the Holy Ghost — not merely joining a church or reforming one's life."
 keyScriptures:
   - "John 3:3-7"

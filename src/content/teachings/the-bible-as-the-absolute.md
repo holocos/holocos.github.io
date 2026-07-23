@@ -1,6 +1,7 @@
 ---
 title: "The Bible as the Absolute"
-category: "The Godhead & the Word"
+indexTitle: "the Bible as the Absolute"
+category: "The Foundations of the Faith"
 summary: "The written Word of God is the believer's sole and final authority — the absolute to which every doctrine, experience, and revelation must tie."
 keyScriptures:
   - "2 Timothy 3:16"

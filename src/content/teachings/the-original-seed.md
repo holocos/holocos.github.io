@@ -1,6 +1,7 @@
 ---
 title: "The Word Is the Original Seed"
-category: "The Godhead & the Word"
+indexTitle: "the Original Seed"
+category: "The Foundations of the Faith"
 summary: "God's Word is the original seed that brings forth after its kind; planted in a predestinated heart, it reproduces the very Life of God in its season."
 keyScriptures:
   - "Genesis 1:11"

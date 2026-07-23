@@ -2,47 +2,94 @@
 import { getCollection } from 'astro:content';
 import { CATEGORIES } from '../../content.config';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import DoctrineCard from '../../components/DoctrineCard.astro';
 
 const teachings = await getCollection('teachings');
 
-// Stable id for anchors / filter targeting.
 const slugifyCategory = (c: string) =>
   c
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
 
-// Group by category in the canonical order (plan §4), sorted within by order.
+// The "completing sentence" lead phrase for each section. Kept here rather than
+// in the content so the stored data stays clean — the presentation does the
+// sentence trick. `inline` repeats the lead beside each row on wide screens;
+// The Believer's Walk is a heading in its own right, so it does neither.
+type Banner = {
+  lead: string;
+  ellipsis: boolean;
+  inline: boolean;
+  blurb: string;
+};
+const BANNERS: Record<string, Banner> = {
+  'The Foundations of the Faith': {
+    lead: 'The Doctrine of',
+    ellipsis: true,
+    inline: true,
+    blurb:
+      'Who God is, the authority of His Word, His finished salvation, and the two seeds.',
+  },
+  'The Revealed Mysteries': {
+    lead: 'The Revelation of',
+    ellipsis: true,
+    inline: true,
+    blurb:
+      'The mysteries opened in this hour — the Seals, the church ages, and the Bride.',
+  },
+  'Prophecy & the End Time': {
+    lead: 'The Prophecy of',
+    ellipsis: true,
+    inline: true,
+    blurb: "God's prophetic clock and what still lies ahead.",
+  },
+  "The Believer's Walk": {
+    lead: "The Believer's Walk",
+    ellipsis: false,
+    inline: false,
+    blurb: 'The life of holiness and the ordinances kept by the church.',
+  },
+};
+
 const grouped = CATEGORIES.map((category) => ({
   category,
   slug: slugifyCategory(category),
+  banner: BANNERS[category],
   entries: teachings
     .filter((t) => t.data.category === category)
     .sort((a, b) => a.data.order - b.data.order),
 })).filter((g) => g.entries.length > 0);
+
+// Short phrase that completes the banner, falling back to the full title.
+const display = (t: (typeof teachings)[number]) =>
+  t.data.indexTitle ?? t.data.title;
 ---
 
 <BaseLayout
   title="Teachings"
-  description="The core doctrines and revelations taught by William Branham, each explained plainly and supported by Scripture."
+  description="The core doctrines, revelations, and prophecies of the Message, each explained plainly and supported by Scripture."
 >
-  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:py-16">
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:py-16">
     <header class="max-w-2xl">
-      <h1 class="text-4xl font-semibold sm:text-5xl">The Teachings</h1>
+      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent">
+        The Teachings
+      </p>
+      <h1 class="mt-3 text-4xl font-semibold sm:text-5xl">
+        The truths, one at a time.
+      </h1>
       <p class="mt-4 text-lg leading-relaxed text-text-muted">
-        The core doctrines and revelations of the Message, each explained in
-        plain language and established on the Word of God. Choose a category or
-        browse them all.
+        Gathered into four &mdash; the Doctrines, the Revelations, the
+        Prophecies, and the Believer&rsquo;s Walk. Each one taken from Scripture
+        and unfolded with care. Read straight through, or go to what you came
+        for.
       </p>
     </header>
 
-    <!-- Category filter pills (plan §7) -->
+    <!-- Section filter pills -->
     <div
       id="category-filter"
       class="mt-8 flex flex-wrap gap-2"
       role="group"
-      aria-label="Filter by category"
+      aria-label="Filter by section"
     >
       <button
         type="button"
@@ -66,8 +113,7 @@ const grouped = CATEGORIES.map((category) => ({
       }
     </div>
 
-    <!-- Grouped doctrine sections -->
-    <div class="mt-12 space-y-16">
+    <div class="mt-14 space-y-16">
       {
         grouped.map((g) => (
           <section
@@ -76,20 +122,58 @@ const grouped = CATEGORIES.map((category) => ({
             class="category-section scroll-mt-24"
             aria-labelledby={`${g.slug}-heading`}
           >
-            <div class="flex items-baseline justify-between gap-4 border-b border-border pb-3">
-              <h2 id={`${g.slug}-heading`} class="font-serif text-2xl font-semibold">
-                {g.category}
+            <div class="border-b border-border pb-4">
+              <h2
+                id={`${g.slug}-heading`}
+                class="font-serif text-3xl font-normal italic text-accent-strong sm:text-4xl"
+              >
+                {g.banner.lead}
+                {g.banner.ellipsis && <span class="text-accent">…</span>}
               </h2>
-              <span class="shrink-0 text-sm text-text-muted">
-                {g.entries.length}{' '}
-                {g.entries.length === 1 ? 'teaching' : 'teachings'}
-              </span>
+              <div class="mt-2 flex items-baseline justify-between gap-4">
+                <p class="text-text-muted">{g.banner.blurb}</p>
+                <span class="shrink-0 text-sm text-text-muted">
+                  {g.entries.length}{' '}
+                  {g.entries.length === 1 ? 'teaching' : 'teachings'}
+                </span>
+              </div>
             </div>
-            <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+            <ol class="mt-2 divide-y divide-border">
               {g.entries.map((entry) => (
-                <DoctrineCard entry={entry} />
+                <li>
+                  <a
+                    href={`/teachings/${entry.id}/`}
+                    class="group flex items-baseline gap-3 rounded-lg px-1 py-4 no-underline transition-colors hover:bg-bg-subtle hover:no-underline sm:px-3"
+                  >
+                    {g.banner.inline && (
+                      <span class="hidden shrink-0 font-serif text-lg italic text-text-muted/70 sm:inline">
+                        {g.banner.lead}
+                      </span>
+                    )}
+                    <span class="min-w-0 flex-1">
+                      <span class="font-serif text-xl text-text transition-colors group-hover:text-accent-strong sm:text-2xl">
+                        {display(entry)}
+                      </span>
+                      {entry.data.draft && (
+                        <span class="ml-2 align-middle rounded-full border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-text-muted">
+                          Draft
+                        </span>
+                      )}
+                      <span class="mt-1 block text-[15px] leading-relaxed text-text-muted">
+                        {entry.data.summary}
+                      </span>
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      class="ml-auto -translate-x-1 self-center text-accent opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+                    >
+                      →
+                    </span>
+                  </a>
+                </li>
               ))}
-            </div>
+            </ol>
           </section>
         ))
       }

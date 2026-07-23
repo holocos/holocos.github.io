@@ -1,6 +1,7 @@
 ---
 title: "Denominationalism"
-category: "The Fall & the Enemy"
+indexTitle: "Denominationalism"
+category: "The Foundations of the Faith"
 summary: "Man-made denominational systems organize around a creed and reject the moving of the living Word; Scripture identifies this spirit of organization with the mark of the beast."
 keyScriptures:
   - "Revelation 13:15-17"

@@ -1,6 +1,7 @@
 ---
 title: "Adoption (The Placing of Sons)"
-category: "Salvation & the New Birth"
+indexTitle: "Adoption — the Placing of Sons"
+category: "The Foundations of the Faith"
 summary: "Adoption is the positioning of a proven, mature son into his rightful inheritance — the placing of the Bride into her position of authority in this hour."
 keyScriptures:
   - "Ephesians 1:5"

@@ -1,6 +1,7 @@
 ---
 title: "The Spoken Word & THUS SAITH THE LORD"
-category: "Prophecy & the End Time"
+indexTitle: "the Spoken Word"
+category: "The Revealed Mysteries"
 summary: "A vindicated prophet speaks not his own words but THUS SAITH THE LORD; the Word spoken through him in this generation is confirmed by the very signs Scripture foretold."
 keyScriptures:
   - "Amos 3:7"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "He That Is In You"
     date: "1963-11-10"
     reference: "63-1110E, para. 50"
-order: 22
+order: 19
 draft: true
 ---
 

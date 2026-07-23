@@ -1,6 +1,7 @@
 ---
 title: "The Godhead"
-category: "The Godhead & the Word"
+indexTitle: "the Godhead"
+category: "The Foundations of the Faith"
 summary: "One God manifested in three offices — Father, Son, and Holy Ghost — not three separate persons."
 keyScriptures:
   - "Deuteronomy 6:4"

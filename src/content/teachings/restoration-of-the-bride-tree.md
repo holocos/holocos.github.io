@@ -1,6 +1,7 @@
 ---
 title: "The Restoration of the Bride Tree"
-category: "The Church & Its History"
+indexTitle: "the Restoration of the Bride Tree"
+category: "The Revealed Mysteries"
 summary: "What the denominational locusts and cankerworms ate through the church ages, God has promised to restore in the last day — a Bride brought back to the original Word."
 keyScriptures:
   - "Joel 2:25"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "The Ten Virgins"
     date: "1960-12-11"
     reference: "60-1211M, para. 30"
-order: 15
+order: 22
 draft: true
 ---
 

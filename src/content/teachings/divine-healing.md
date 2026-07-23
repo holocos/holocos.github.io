@@ -1,6 +1,7 @@
 ---
 title: "Divine Healing"
-category: "Christian Living & Ordinances"
+indexTitle: "Divine Healing"
+category: "The Believer's Walk"
 summary: "Jesus Christ is the same yesterday, today, and forever; the same Christ who healed in His earthly ministry still heals today through faith in His finished work."
 keyScriptures:
   - "Hebrews 13:8"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "Jesus Christ The Same Yesterday, Today, And Forever"
     date: "1958-02-07"
     reference: "58-0207, para. 20"
-order: 25
+order: 26
 draft: true
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Holiness & Godly Living"
-category: "Christian Living & Ordinances"
+indexTitle: "Holiness & Godly Living"
+category: "The Believer's Walk"
 summary: "The Bride is called to separation unto God — modesty, purity, and Christlike character — a life set apart that reflects the holiness of the One who redeemed her."
 keyScriptures:
   - "1 Peter 1:15-16"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "Blasphemous Names"
     date: "1962-11-04"
     reference: "62-1104M, para. 90"
-order: 27
+order: 28
 draft: true
 ---
 

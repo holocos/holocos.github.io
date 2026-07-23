@@ -1,6 +1,7 @@
 ---
 title: "The Evening Light"
-category: "The Church & Its History"
+indexTitle: "the Evening Light"
+category: "The Revealed Mysteries"
 summary: "Zechariah promised that at evening time it shall be light — the same Gospel light that shone in the east at the beginning shines again in the west at the end of the day."
 keyScriptures:
   - "Zechariah 14:7"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "Countdown"
     date: "1962-11-25"
     reference: "62-1125E, para. 20"
-order: 16
+order: 20
 draft: true
 ---
 

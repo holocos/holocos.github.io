@@ -1,6 +1,7 @@
 ---
 title: "The Token"
-category: "Prophecy & the End Time"
+indexTitle: "the Token"
+category: "The Revealed Mysteries"
 summary: "As the blood on the doorpost was the token in Egypt, so the baptism of the Holy Ghost — the token of the applied Life of Christ — must be displayed to be passed over."
 keyScriptures:
   - "Exodus 12:13"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "The Token"
     date: "1964-02-08"
     reference: "64-0208, para. 120"
-order: 21
+order: 18
 draft: true
 ---
 

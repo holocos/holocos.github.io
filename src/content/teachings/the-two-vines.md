@@ -1,6 +1,7 @@
 ---
 title: "The Two Vines"
-category: "The Fall & the Enemy"
+indexTitle: "the Two Vines"
+category: "The Foundations of the Faith"
 summary: "A true vine and a false vine grow together until harvest — wheat and tares side by side — looking alike, yet born of two different spirits."
 keyScriptures:
   - "Matthew 13:24-30"

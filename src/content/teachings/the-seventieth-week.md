@@ -1,5 +1,6 @@
 ---
 title: "The Seventieth Week & the Tribulation"
+indexTitle: "the Seventieth Week & the Tribulation"
 category: "Prophecy & the End Time"
 summary: "After the Bride is taken, the final week of Daniel unfolds — the ministry of the two witnesses, the sealing of the 144,000, and the great tribulation upon the earth."
 keyScriptures:
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "The Sixth Seal"
     date: "1963-03-23"
     reference: "63-0323, para. 110"
-order: 24
+order: 25
 draft: true
 ---
 

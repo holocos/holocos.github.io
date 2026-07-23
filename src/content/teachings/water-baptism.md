@@ -1,6 +1,7 @@
 ---
 title: "Water Baptism in the Name of the Lord Jesus Christ"
-category: "The Godhead & the Word"
+indexTitle: "Water Baptism in the Name of the Lord Jesus Christ"
+category: "The Foundations of the Faith"
 summary: "Believers are baptized by immersion in the name of the Lord Jesus Christ, as Acts 2:38 carries out the very command of Matthew 28:19."
 keyScriptures:
   - "Acts 2:38"

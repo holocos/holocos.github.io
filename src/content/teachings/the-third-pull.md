@@ -1,6 +1,7 @@
 ---
 title: "The Third Pull"
-category: "Prophecy & the End Time"
+indexTitle: "the Third Pull"
+category: "The Revealed Mysteries"
 summary: "The third pull is the final phase of the ministry — the opening of the Word and the spoken word bringing creation into being — reserved for the Bride at the end."
 keyScriptures:
   - "Mark 11:23"
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "The Third Exodus"
     date: "1963-06-30"
     reference: "63-0630M, para. 100"
-order: 20
+order: 17
 draft: true
 ---
 

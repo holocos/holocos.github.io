@@ -1,5 +1,6 @@
 ---
 title: "Israel & Daniel's Seventy Weeks"
+indexTitle: "Israel & Daniel's Seventy Weeks"
 category: "Prophecy & the End Time"
 summary: "Daniel's prophecy of seventy weeks is God's prophetic clock for Israel; sixty-nine weeks are fulfilled, with one week — seven years — yet remaining for the nation."
 keyScriptures:
@@ -13,7 +14,7 @@ sermonReferences:
   - title: "Gabriel's Instructions To Daniel"
     date: "1961-07-30"
     reference: "61-0730M, para. 30"
-order: 23
+order: 24
 draft: true
 ---
 
