@@ -32,7 +32,7 @@ const categories = CATEGORIES.map((category) => ({
 }));
 
 // A short, representative set of featured doctrines.
-const featuredIds = ['godhead', 'serpents-seed', 'seven-church-ages', 'the-seven-seals'];
+const featuredIds = ['godhead', 'the-new-birth', 'seven-church-ages', 'the-seven-seals'];
 const featured = featuredIds
   .map((id) => teachings.find((t) => t.id === id))
   .filter((t): t is (typeof teachings)[number] => Boolean(t));
