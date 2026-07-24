@@ -4,10 +4,10 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// TODO: set `site` to the production URL before deploy (Phase 6). It feeds
-// canonical URLs, Open Graph tags, and the generated sitemap.
+// `site` feeds canonical URLs, Open Graph tags, and the generated sitemap.
+// Served at the domain root (a GitHub user site), so no `base` path is needed.
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://holocos.github.io',
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
